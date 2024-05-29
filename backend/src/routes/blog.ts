@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
+import { CreatePostInput, UpdatePostInput } from "dorkydhruv-common";
 import { Hono } from "hono";
 import { verify } from "hono/jwt";
 
@@ -15,6 +16,10 @@ export const blogRouter = new Hono<{
 
 blogRouter.use('*',async (c,next)=>{
     const jwt = c.req.header('Authorization')?.split(" ")[1] || "";
+    if(!jwt){
+        c.status(403);
+        return c.json({error:"Unauthorized"});
+    }
     const res =await  verify(jwt,c.env?.JWT_SECRET);
     if(res.id){
       c.set('userId',res.id)
@@ -64,6 +69,11 @@ blogRouter.post('/', async (c) => {
         datasourceUrl: c.env?.DATABASE_URL,
       }).$extends(withAccelerate());
     const body =  await c.req.json();
+    const {success} = CreatePostInput.safeParse(body);
+    if(!success){
+        c.status(400);
+        return c.json({error:"Invalid input"});
+    }
     const post = await prisma.post.create({
         data:{
             title:body.title,
@@ -80,6 +90,11 @@ blogRouter.put('/',async (c) => {
         datasourceUrl: c.env?.DATABASE_URL,
       }).$extends(withAccelerate());
     const body = await c.req.json();
+    const {success} = UpdatePostInput.safeParse(body);
+    if(!success){
+        c.status(400);
+        return c.json({error:"Invalid input"});
+    }
     await prisma.post.update({
         where: {
             id: body.id,
