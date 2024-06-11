@@ -9,26 +9,25 @@ export const BlogCard = ({
     authorName,
     title,
     content,
-    publishedDate
+    publishedDate 
 }: BlogCardProps )=>{
     return (
-        <div>
+        <div className="border-b-2 border-slate-200 pb-4 p-5">
             <div className="flex ">
                 <div className="flex justify-center flex-col"><Avatar authorName={authorName}></Avatar></div>
                 <div className="flex justify-center">
-                <div className="pl-2 mr-2 font-medium ">{authorName}</div> &#9679; <div className="pl-2 font-thin text-sm text-slate-900">{publishedDate}</div>
+                <div className="pl-2 mr-2 font-medium ">{authorName}</div> <span>&#183;</span> <div className="pl-2 flex justify-center flex-col font-light text-sm text-slate-900">{publishedDate}</div>
                 </div>
             </div>
-            <div>
+            <div className="text-lg font-semibold pt-2">
                 {title}
             </div>
-            <div>
+            <div className="text-sm font-normal text-black">
                 {content.substring(0,100)+ "...."}
             </div>
-            <div>
+            <div className="text-slate-500 text-md font-extralight pt-2">
                 {`${Math.ceil(content.length/100)} minutes`}
             </div>
-            <div className="bg-slate-300 h-1 w-full"> </div>
         </div>
     )
 }
