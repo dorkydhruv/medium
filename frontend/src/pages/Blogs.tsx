@@ -1,7 +1,9 @@
+import { BlogCard } from "../components/Blog-Card"
+
 export const Blogs =()=>{
     return (
         <div>
-            <h1>Blogs</h1>
+            <BlogCard authorName={"Dhuv"} content={"content of blog"} publishedDate={"2021-09-01"} title={"Blog 1"}/>
         </div>
     )
 }
