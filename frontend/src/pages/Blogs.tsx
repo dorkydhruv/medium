@@ -3,17 +3,16 @@ import { BlogCard } from "../components/Blog-Card"
 import { useBlogs } from "../hooks"
 
 export const Blogs =()=>{
-    const blogs = useBlogs();
+    const {loading,blogs} = useBlogs();
 
-    if(blogs.loading){
+    if(loading){
         return <div>Loading...</div>
     }
 
     return (
         <><AppBar /><div className="flex justify-center">
-            <div className="max-w-xl">
-                //@ts-ignore
-                {blogs.map(blog=><BlogCard authorName={"Dhuv"} content={"I ahve been making videos since childhood and today I have given you a remedy to make b=videos worth watchinh"} publishedDate={"2nd Feb 2024"} title={"How I amke 20 dollars a moth making yt vidoes"} />)}
+            <div className="max-w-screen-md w-screen ">
+                {blogs.map(blog=><BlogCard authorName={blog.author.name || "Anonymous"} content={blog.content} publishedDate={"2020"} title={blog.title} key={blog.id} id={blog.id} />)}
             </div>
         </div></>
     )

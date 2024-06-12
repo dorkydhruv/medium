@@ -1,4 +1,7 @@
+import { Link } from "react-router-dom";
+
 interface BlogCardProps{
+    id : string;
     authorName: string;
     title: string;
     content: string;
@@ -7,12 +10,14 @@ interface BlogCardProps{
 
 export const BlogCard = ({
     authorName,
+    id,
     title,
     content,
     publishedDate 
 }: BlogCardProps )=>{
     return (
-        <div className="border-b-2 border-slate-200 pb-4 p-5">
+        <Link to={`/blog/${id}`}>
+            <div className="border-b-2 border-slate-200 pb-4 p-5 cursor-pointer ">
             <div className="flex ">
                 <div className="flex justify-center flex-col"><Avatar authorName={authorName}></Avatar></div>
                 <div className="flex justify-center">
@@ -29,6 +34,7 @@ export const BlogCard = ({
                 {`${Math.ceil(content.length/100)} minutes`}
             </div>
         </div>
+        </Link>
     )
 }
 
