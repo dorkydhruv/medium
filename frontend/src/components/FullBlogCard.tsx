@@ -4,24 +4,24 @@ export const FullBlogCard = ({blog}:{blog:Blog})=>{
     return <div className="flex justify-center">
         <div className="grid grid-cols-12 px-10 pt-20 max-w-screen-2xl w-full">
         <div className="col-span-8">
-            <div className="text-3xl font-extrabold">
+            <div className="text-4xl font-extrabold">
                 {blog.title}
             </div>
             <div className="text-md text-slate-500 pt-2">
                 Posted on 2nd December 2021
             </div>
-            <div className="pt-2 text-gray-900">
+            <div className="pt-2 text-gray-900 text-xl">
             {blog.content}
             </div>
         </div>
         <div className="col-span-4">
-            <div className="flex justify-center">
+            <div className="flex items-center gap-5">
                 <Avatar authorName={blog.author.name || "Anonymous"} />
                 <div>
-                    <div className="text-2xl font-bold ">
+                    <div className="text-3xl font-bold pt-2 ">
                         {blog.author.name || "Anonymous"} 
                     </div>
-                    <div className="text-md font-light text-slate-700">
+                    <div className="text-md font-light text-slate-700 pt-2">
                         Random catchphrase here ... :)
                     </div>  
                 </div>
